@@ -41,16 +41,16 @@ conn.query('Drop Table Doodle',
 conn.query(`CREATE TABLE Time
             (
                 Header varchar(100),
-                T0 varchar(100),
-                T1 varchar(100),
-                T2 varchar(100),
-                T3 varchar(100),
-                T4 varchar(100),
-                T5 varchar(100),
-                T6 varchar(100),
-                T7 varchar(100),
-                T8 varchar(100),
-                T9 varchar(100)
+                t0 varchar(100),
+                t1 varchar(100),
+                t2 varchar(100),
+                t3 varchar(100),
+                t4 varchar(100),
+                t5 varchar(100),
+                t6 varchar(100),
+                t7 varchar(100),
+                t8 varchar(100),
+                t9 varchar(100)
             )
             `
 ,(err, rows, fields) => {
@@ -81,16 +81,16 @@ conn.query(
         `CREATE TABLE Doodle
         (
             uName varchar(100),
-            T0 BOOL,
-            T1 BOOL,
-            T2 BOOL,
-            T3 BOOL,
-            T4 BOOL,
-            T5 BOOL,
-            T6 BOOL,
-            T7 BOOL,
-            T8 BOOL,
-            T9 BOOL
+            t0 BOOL,
+            t1 BOOL,
+            t2 BOOL,
+            t3 BOOL,
+            t4 BOOL,
+            t5 BOOL,
+            t6 BOOL,
+            t7 BOOL,
+            t8 BOOL,
+            t9 BOOL
         )
         `
         ,(err, rows, fields) => {
