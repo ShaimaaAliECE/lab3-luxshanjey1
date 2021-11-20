@@ -1,6 +1,6 @@
 const express = require('express');
-const req = require('express/lib/request');
-const Connection = require('mysql/lib/Connection');
+//const req = require('express/lib/request');
+//const Connection = require('mysql/lib/Connection');
 const newConnection = require('./DBConnection')
 
 const app = express(); //returns instance of a server
@@ -19,14 +19,14 @@ app.get('/login', (request, response) => {
                 ,
                 (err, rows, fields) => {
                     if(err){
-                        console.log(err)
+                        console.log(err);
                     }else{ 
                         let signIn = rows;
                         //if password and username match the one in the database
                         if(request.query.username == signIn[0].username && request.query.password == signIn[0].password)
                             response.redirect('/adminPage'); //redirect if correct
                         else 
-                            response.redirect('/signIn') //if wrong refresh page
+                            response.redirect('/signIn'); //if wrong refresh page
                 }
             }
                 );
@@ -42,19 +42,20 @@ app.get('/adminPage', (request, response) => {
     conn.query('select * from Time', 
         (err, rows, fields) => {
             let content = '';
+            content += `<table style = 'border: 2px solid black'>`;
             let headers = rows;
             content += '<tr>'
             content += `<th>${headers[0].Header}</th>`;
-            content += `<th>${headers[0].T0}</th>`;
-            content += `<th>${headers[0].T1}</th>`;
-            content += `<th>${headers[0].T2}</th>`;
-            content += `<th>${headers[0].T3}</th>`;
-            content += `<th>${headers[0].T4}</th>`;
-            content += `<th>${headers[0].T5}</th>`;
-            content += `<th>${headers[0].T6}</th>`;
-            content += `<th>${headers[0].T7}</th>`;
-            content += `<th>${headers[0].T8}</th>`;
-            content += `<th>${headers[0].T9}</th>`;
+            content += `<th>${headers[0].t0}</th>`;
+            content += `<th>${headers[0].t1}</th>`;
+            content += `<th>${headers[0].t2}</th>`;
+            content += `<th>${headers[0].t3}</th>`;
+            content += `<th>${headers[0].t4}</th>`;
+            content += `<th>${headers[0].t5}</th>`;
+            content += `<th>${headers[0].t6}</th>`;
+            content += `<th>${headers[0].t7}</th>`;
+            content += `<th>${headers[0].t8}</th>`;
+            content += `<th>${headers[0].t9}</th>`;
             content += '</tr>';
             response.write(content);
             if (err)
@@ -65,7 +66,7 @@ app.get('/adminPage', (request, response) => {
     );
 
     conn.query('select * from Doodle',
-        (err,row, fields) => {
+        (err,rows, fields) => {
             let data = rows;
             let content = '';
             for(d of data){
@@ -102,7 +103,7 @@ app.get('/adminPage', (request, response) => {
         }
     );
 
-    conne.end();
+    conn.end();
 
 });
 
@@ -231,9 +232,10 @@ app.get('/guestPage', (request, response) => {
     conn.query('select * from Time', 
         (err, rows, fields) => {
             let content = '';
-
+            content += `<table style = 'border: 1px solid black'>`;
             let headers = rows;
             content += '<tr>';
+            content += `<th>${headers[0].Header}</th>`;
             content += `<th>${headers[0].t0}</th>`;
             content += `<th>${headers[0].t1}</th>`;
             content += `<th>${headers[0].t2}</th>`;
@@ -253,7 +255,7 @@ app.get('/guestPage', (request, response) => {
         });
     
     conn.query('select * from Doodle',
-        (err,row, fields) => {
+        (err,rows, fields) => {
             let data = rows;
             let content = '';
             for(d of data){
@@ -284,18 +286,18 @@ app.get('/guestPage', (request, response) => {
 
             //update table within the form
             content += '<tr>';
-            content += `<form action = '/add-data' id = 'form'>
+            content += `<form action = '/addData' id = 'form'>
                             <td><input name = "name"/></td>
-                            <td><input type = 'checkbox' name = "t0" form = 'form'/></td>
-                            <td><input type = 'checkbox' name = "t1" form = 'form'/></td>
-                            <td><input type = 'checkbox' name = "t2" form = 'form'/></td>
-                            <td><input type = 'checkbox' name = "t3" form = 'form'/></td>
-                            <td><input type = 'checkbox' name = "t4" form = 'form'/></td>
-                            <td><input type = 'checkbox' name = "t5" form = 'form'/></td>
-                            <td><input type = 'checkbox' name = "t6" form = 'form'/></td>
-                            <td><input type = 'checkbox' name = "t7" form = 'form'/></td>
-                            <td><input type = 'checkbox' name = "t8" form = 'form'/></td>
-                            <td><input type = 'checkbox' name = "t9" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t0" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t1" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t2" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t3" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t4" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t5" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t6" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t7" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t8" form = 'form'/></td>
+                            <td><input type = "checkbox" name = "t9" form = 'form'/></td>
                         </form>`;
             content += '</tr>';
             content += '</table>';
@@ -317,20 +319,20 @@ app.get('/addData', (request, response) => {
     conn.query(
         //if the value exists then it is true, else it is false
         `insert into Doodle values (
-            '${req.query.name}',
-            '${req.query.t0 ? 1 : 0},
-            '${req.query.t1 ? 1 : 0}',
-            '${req.query.t2 ? 1 : 0}',
-            '${req.query.t3 ? 1 : 0}',
-            '${req.query.t4 ? 1 : 0}',
-            '${req.query.t5 ? 1 : 0}',
-            '${req.query.t6 ? 1 : 0}',
-            '${req.query.t7 ? 1 : 0}',
-            '${req.query.t8 ? 1 : 0}',
-            '${req.query.t9 ? 1 : 0}'
+            '${request.query.name}',
+            '${request.query.t0 ? 1 : 0},
+            '${request.query.t1 ? 1 : 0}',
+            '${request.query.t2 ? 1 : 0}',
+            '${request.query.t3 ? 1 : 0}',
+            '${request.query.t4 ? 1 : 0}',
+            '${request.query.t5 ? 1 : 0}',
+            '${request.query.t6 ? 1 : 0}',
+            '${request.query.t7 ? 1 : 0}',
+            '${request.query.t8 ? 1 : 0}',
+            '${request.query.t9 ? 1 : 0}'
             )`,
         (err, rows, fields) => {
-          res.redirect("/guestPage");
+          response.redirect("/guestPage");
           if (err) 
             console.log(err);
         }

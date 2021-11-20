@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const { VARCHAR } = require('mysql/lib/protocol/constants/types');
+//const { VARCHAR } = require('mysql/lib/protocol/constants/types');
 
 let conn = mysql.createConnection({
     host: '35.188.6.157', 
@@ -10,16 +10,7 @@ let conn = mysql.createConnection({
 
 conn.connect();
 
-conn.query('Drop Table Time', 
-            (err, rows, fields) => {
-                if (err) 
-                    console.log(err);
-                else 
-                    console.log("Time Table Dropped");   
-            }
-        );
-
-conn.query('Drop Table SignIn', 
+conn.query(`Drop Table SignIn`, 
                     (err, rows, fields) => {
                         if (err) 
                             console.log(err);
@@ -28,7 +19,18 @@ conn.query('Drop Table SignIn',
                     }
                 );
 
-conn.query('Drop Table Doodle', 
+
+conn.query(`Drop Table Time`, 
+            (err, rows, fields) => {
+                if (err) 
+                    console.log(err);
+                else 
+                    console.log("Time Table Dropped");   
+            }
+        );
+
+
+conn.query(`Drop Table Doodle`, 
                 (err, rows, fields) => {
                     if (err) 
                         console.log(err);
