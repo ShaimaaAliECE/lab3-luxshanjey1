@@ -143,7 +143,7 @@ app.get('/changeTime', (request, response) => {
       if (err) 
         console.log(err);
     });
-    //take values from the fields and update table
+    //use values given to update table
     conn.query(
       `UPDATE Time set T0 = '${request.query.t0}'`,
       (err, rows, fields) => {
