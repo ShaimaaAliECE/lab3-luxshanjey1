@@ -64,7 +64,7 @@ app.get('/adminPage', (request, response) => {
 
         }
     );
-
+    //displays stored data
     conn.query('select * from Doodle',
         (err,rows, fields) => {
             let data = rows;
@@ -73,25 +73,25 @@ app.get('/adminPage', (request, response) => {
                 content += '<tr>';
                 content += `<td>${d.Name}</td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time1 ? "green" : "grey"}'></td>`;
+                ${d.t0 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time2 ? "green" : "grey"}'></td>`;
+                ${d.t1 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time3 ? "green" : "grey"}'></td>`;
+                ${d.t2 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time4 ? "green" : "grey"}'></td>`;
+                ${d.t3 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time5 ? "green" : "grey"}'></td>`;
+                ${d.t4 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time6 ? "green" : "grey"}'></td>`;
+                ${d.t5 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time7 ? "green" : "grey"}'></td>`;
+                ${d.t6 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time8 ? "green" : "grey"}'></td>`;
+                ${d.t7 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time9 ? "green" : "grey"}'></td>`;
+                ${d.t8 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time10 ? "green" : "grey"}'></td>`;
+                ${d.t9 ? "blue" : "grey"}'></td>`;
                 content += '</tr>';
             }
                 content += "</table>";
@@ -117,7 +117,7 @@ app.get('/timeChange', (request, response)=> {
             let content = '';
             let time = rows;
 
-            content += "<form action = '</changeTime'>";
+            content += "<form action = '/changeTime'>";
             content += `First Available Time:  <input name = 't0' value ='${time[0].t0}'/></br>`;
             content += `Second Available Time: <input name = 't1' value ='${time[0].t1}'/></br>`;
             content += `Third Available Time:  <input name = 't2' value ='${time[0].t2}'/></br>`;
@@ -128,6 +128,7 @@ app.get('/timeChange', (request, response)=> {
             content += `Eighth Available Time:  <input name = 't7' value ='${time[0].t7}'/></br>`;
             content += `Ninth Available Time;<input name = 't8' value ='${time[0].t8}'/></br>`;
             content += `Tenth Available Time: <input name = 't9' value ='${time[0].t9}'/></br>`;
+            content += `<input type = 'submit' value ='save'>`;
             content += '</form>';
 
             response.send(content);
@@ -139,7 +140,7 @@ app.get('/timeChange', (request, response)=> {
 
 //UPDATE THE TABLE
 app.get('/changeTime', (request, response) => {
-    let conn = newConnnection();
+    let conn = newConnection();
     conn.connect();
     conn.query(`UPDATE Time set Header = 'Name'`, (err, rows, fields) => {
       if (err) 
@@ -147,70 +148,70 @@ app.get('/changeTime', (request, response) => {
     });
     //use values given to update table
     conn.query(
-      `UPDATE Time set T0 = '${request.query.t0}'`,
+      `UPDATE Time set t0 = '${request.query.t0}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
       }
     );
     conn.query(
-      `UPDATE Time set T1 = '${reuest.query.t1}'`,
+      `UPDATE Time set t1 = '${request.query.t1}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
       }
     );
     conn.query(
-      `UPDATE Time set T2 = '${request.query.t2}'`,
+      `UPDATE Time set t2 = '${request.query.t2}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
       }
     );
     conn.query(
-      `UPDATE Time set T3 = '${request.query.t3}'`,
+      `UPDATE Time set t3 = '${request.query.t3}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
       }
     );
     conn.query(
-      `UPDATE Time set T4 = '${request.query.t4}'`,
+      `UPDATE Time set t4 = '${request.query.t4}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
       }
     );
     conn.query(
-      `UPDATE Time set T5 = '${request.query.t5}'`,
+      `UPDATE Time set t5 = '${request.query.t5}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
       }
     );
     conn.query(
-      `UPDATE Time set T6 = '${request.query.t6}'`,
+      `UPDATE Time set t6 = '${request.query.t6}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
       }
     );
     conn.query(
-      `UPDATE Time set T7 = '${request.query.t7}'`,
+      `UPDATE Time set t7 = '${request.query.t7}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
       }
     );
     conn.query(
-      `UPDATE Time set T8 = '${request.query.t8}'`,
+      `UPDATE Time set t8 = '${request.query.t8}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
       }
     );
     conn.query(
-      `UPDATE Time set T9 = '${request.query.t9}'`,
+      `UPDATE Time set t9 = '${request.query.t9}'`,
       (err, rows, fields) => {
         if (err) 
             console.log(err);
@@ -253,7 +254,7 @@ app.get('/guestPage', (request, response) => {
             if(err)
                 console.log(err);
         });
-    
+    //displays stored data 
     conn.query('select * from Doodle',
         (err,rows, fields) => {
             let data = rows;
@@ -262,27 +263,28 @@ app.get('/guestPage', (request, response) => {
                 content += '<tr>';
                 content += `<td>${d.Name}</td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time1 ? "green" : "grey"}'></td>`;
+                ${d.t0 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time2 ? "green" : "grey"}'></td>`;
+                ${d.t1 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time3 ? "green" : "grey"}'></td>`;
+                ${d.t2 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time4 ? "green" : "grey"}'></td>`;
+                ${d.t3 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time5 ? "green" : "grey"}'></td>`;
+                ${d.t4 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time6 ? "green" : "grey"}'></td>`;
+                ${d.t5 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time7 ? "green" : "grey"}'></td>`;
+                ${d.t6 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time8 ? "green" : "grey"}'></td>`;
+                ${d.t7 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time9 ? "green" : "grey"}'></td>`;
+                ${d.t8 ? "blue" : "grey"}'></td>`;
                 content += `<td style = 'background-color: 
-                ${d.Time10 ? "green" : "grey"}'></td>`;
+                ${d.t9 ? "blue" : "grey"}'></td>`;
                 content += '</tr>';
-            }
+
+        }
 
             //update table within the form
             content += '<tr>';
@@ -339,7 +341,7 @@ app.get('/addData', (request, response) => {
       );
     
       conn.end();
-})
+});
 
 
 app.listen(80);
