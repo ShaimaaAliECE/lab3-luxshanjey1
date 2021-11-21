@@ -104,7 +104,7 @@ conn.query(
     );
 
 //create admin username and password and store within the database
-conn.query(`insert into SignIn values ('admin', 'admin')`
+conn.query(`insert into SignIn values ('abc', 'abc')`
             , (err, rows, fields) => {
                 if(err)
                     console.log(err)
